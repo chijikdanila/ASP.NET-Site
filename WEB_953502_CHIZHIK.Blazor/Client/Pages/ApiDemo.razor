@@ -1,0 +1,24 @@
+﻿@using WEB_953502_CHIZHIK.Blazor.Client.Components
+@using WEB_953502_CHIZHIK.Blazor.Client.Models
+
+@page "/apidemo"
+@inject HttpClient client
+<div class="container">
+    <BookList @bind-Books="@Books" SelectedObjectChanged="ShowDetails"></BookList>
+    <BookDetails @bind-Book="SelectedBook"></BookDetails>
+</div>
+@code {
+    [Parameter]
+    public IEnumerable<ListViewModel> Books { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        Books = await client.GetFromJsonAsync<IEnumerable<ListViewModel>>("api/books");
+    }
+    [Parameter]
+    public DetailsViewModel SelectedBook { get; set; }
+    private async Task ShowDetails(int id)
+    {
+        SelectedBook = await client.GetFromJsonAsync<DetailsViewModel>($"api/books/{id}");
+    }
+}
+

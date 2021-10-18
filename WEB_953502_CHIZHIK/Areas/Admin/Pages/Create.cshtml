@@ -1,0 +1,61 @@
+﻿@page
+@model WEB_953502_CHIZHIK.Areas.Admin.Pages.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>Book</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Book.BookName" class="control-label"></label>
+                <input asp-for="Book.BookName" class="form-control" />
+                <span asp-validation-for="Book.BookName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Book.Author" class="control-label"></label>
+                <input asp-for="Book.Author" class="form-control" />
+                <span asp-validation-for="Book.Author" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Book.Price" class="control-label"></label>
+                <input asp-for="Book.Price" class="form-control" />
+                <span asp-validation-for="Book.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Book.Image" class="control-label"></label>
+                <div class="custom-file mt-3">
+                    <input type="file" asp-for="Image" class="custom-file-input" id="customFile">
+                    <label class="custom-file-label" for="customFile">Выберите файл</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Book.BookGroupId" class="control-label"></label>
+                <select asp-for="Book.BookGroupId" class="form-control" asp-items="ViewBag.BookGroupId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts{
+    <script src="~/lib/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
+    <script>
+        bsCustomFileInput.init();
+    </script>
+}

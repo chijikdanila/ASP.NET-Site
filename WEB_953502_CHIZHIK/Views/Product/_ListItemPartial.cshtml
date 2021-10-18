@@ -1,0 +1,36 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model Book
+<div class='card m-2 p-1 text-center col-4'>
+    <img src="~/@Model.Image"
+         alt='NoImage'
+         class="card-img-top" />
+    <div class="card-body">
+        <h5 class="card-title">
+            @Model.BookName
+        </h5>
+        <p class="card-text">
+            @Model.Author
+        </p>
+        <div class="card-text badge badge-secondary">
+            <h6>@Model.Price BYN</h6>
+        </div>
+        @{ // Получение текущего адреса
+            var request = ViewContext.HttpContext.Request;
+            var returnUrl = request.Path +
+           request.QueryString.ToUriComponent();
+        }
+        <!--Разметка кнопки добавления в корзину-->
+        <p class="mt-2">
+            <a asp-action="Add"
+               asp-controller="Cart"
+               asp-route-id="@Model.BookId"
+               asp-route-returnUrl="@returnUrl"
+               class="btn btn-primary">
+                <i class="fa fa-shopping-cart"></i> В корзину
+            </a>
+        </p>
+    </div>
+</div>
+
